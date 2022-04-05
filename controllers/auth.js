@@ -50,18 +50,19 @@ const googleSignIn = async (req, res = response) => {
 
     let usuario = await Usuario.findOne({ correo });
     if (!usuario) {
-      const data = { 
+      const data = {
         nombre,
         correo,
-        password: ':P',
+        password: ":P",
         img,
+        rol: "USER_ROLE",
         google: true,
       };
       usuario = new Usuario(data);
       await usuario.save();
     }
 
-    if(!usuario.estado){
+    if (!usuario.estado) {
       return res.status(401).json({
         msg: "Hablé con el administrador, usuario Bloqueado",
       });

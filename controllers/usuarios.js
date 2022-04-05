@@ -20,7 +20,7 @@ const usuariosGet = async (req = request, res = response) => {
   });
 };
 
-const usuariosPost = async (req, res) => {
+const usuariosPost = async (req, res = response) => {
   const { nombre, correo, password, rol } = req.body;
   const usuario = new Usuario({ nombre, correo, password, rol });
 
@@ -41,7 +41,7 @@ const usuariosPut = async (req, res) => {
     const salt = bcryptjs.genSaltSync();
     resto.password = bcryptjs.hashSync(password, salt);
   }
-  const usuario = await Usuario.findByIdAndUpdate(id, resto,{new: true});
+  const usuario = await Usuario.findByIdAndUpdate(id, resto, { new: true });
 
   res.json(usuario);
 };
